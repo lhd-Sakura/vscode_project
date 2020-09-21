@@ -24,15 +24,12 @@ int main()
     cout << "aa\tHelloWorld" << endl;
     cout << "aaa\tHelloWorld" << endl;
 
-
-
     // //字符串
     // char string1[] = "string";
     // cout << string1 << endl;
 
     // string string2 = "string2";
     // cout << string2 << endl;
-
 
     // //数据输入
     // //1.整型
@@ -50,19 +47,16 @@ int main()
     // cin >> ch;
     // cout << "字符型变量" << ch;
 
-
     //4.字符串
     // string str = "hello";
     // cin >> str;
     // cout << "字符串" << str << endl;
-
 
     //运算符，不允许小数出现取模运算
     // int a1 = 10;
     // int b1 = 3;
     // cout << a1 - b1 << endl;
     // cout << (a1 == b1) << endl;
-
 
     //多else语句判断
     // int score = 0;
@@ -80,7 +74,7 @@ int main()
     //     {
     //         cout << "哈工大" << endl;
     //     }
-        
+
     // }
     // else if(score > 500 and score < 600)
     // {
@@ -95,23 +89,21 @@ int main()
     //     cout << "未考上大学" << endl;
     // }
 
+    //在循环语句中，跳过本次循环中余下尚执行的语句，继续执行下一次循环continue
+
+    //goto语句
+    cout << "1.考上大学" << endl;
+    cout << "2.考上大学" << endl;
+    goto FLAG;
+    cout << "3.考上大学" << endl;
+    cout << "4.考上大学" << endl;
+    FLAG:
+    cout << "5.考上大学" << endl;
 
 
 
 
-
-
-
-
-
+    
 
     return 0;
 }
-
-
-
-
-
-
-
-
