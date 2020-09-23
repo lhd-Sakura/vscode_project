@@ -1,3 +1,15 @@
+/*
+
+    制表符\t
+
+*/
+
+
+
+
+
+
+
 #include <iostream>
 
 using namespace std;

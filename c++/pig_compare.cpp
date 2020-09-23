@@ -1,3 +1,12 @@
+/*
+
+    比较三只猪的重量
+
+*/
+
+
+
+
 #include <iostream>
 //#include <string>
 

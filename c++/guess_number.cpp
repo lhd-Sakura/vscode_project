@@ -1,3 +1,14 @@
+/*
+
+    猜测0-99中的随机数
+
+
+*/
+
+
+
+
+
 #include <ctime>
 #include <iostream>
 

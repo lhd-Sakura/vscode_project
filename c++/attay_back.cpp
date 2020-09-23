@@ -1,3 +1,10 @@
+/*
+    逆置数组函数
+
+
+*/
+
+
 #include <iostream>
 
 using namespace std;

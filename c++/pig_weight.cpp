@@ -1,3 +1,13 @@
+/*
+
+    利用数组求最重的猪
+
+*/
+
+
+
+
+
 #include <iostream>
 
 using namespace std;

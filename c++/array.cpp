@@ -1,12 +1,14 @@
-#include <iostream>
-
-using namespace std;
-
 /*
     数据类型  数组名【 数组长度 】 = {值1.值2，。。。}；
     数据类型  数组名【  】 = {值1.值2，。。。}；
 
 */
+
+
+#include <iostream>
+
+using namespace std;
+
 
 int main(int argc, char const *argv[])
 {
