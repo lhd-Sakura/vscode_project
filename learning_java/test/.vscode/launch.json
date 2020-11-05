@@ -1,0 +1,35 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Addition<test_4ac7bd7a>",
+            "request": "launch",
+            "mainClass": "Addition",
+            "projectName": "test_4ac7bd7a"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-App<test_4ac7bd7a>",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "test_4ac7bd7a"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-FirstApp<test_4ac7bd7a>",
+            "request": "launch",
+            "mainClass": "FirstApp",
+            "projectName": "test_4ac7bd7a"
+        }
+    ]
+}
