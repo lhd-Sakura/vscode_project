@@ -8,28 +8,22 @@
             "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
+            "encoding": "GBK"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Addition<test_4ac7bd7a>",
+            "name": "Debug (Launch)-Fonts<learning_java_858d827>",
             "request": "launch",
-            "mainClass": "Addition",
-            "projectName": "test_4ac7bd7a"
+            "mainClass": "Fonts",
+            "projectName": "learning_java_858d827"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-App<test_4ac7bd7a>",
+            "name": "Debug (Launch)-ShowColors<learning_java_858d827>",
             "request": "launch",
-            "mainClass": "App",
-            "projectName": "test_4ac7bd7a"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-FirstApp<test_4ac7bd7a>",
-            "request": "launch",
-            "mainClass": "FirstApp",
-            "projectName": "test_4ac7bd7a"
+            "mainClass": "ShowColors",
+            "projectName": "learning_java_858d827"
         }
     ]
 }
