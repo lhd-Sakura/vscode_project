@@ -6,21 +6,23 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+    string str;
+    getline(cin, str);
+    int len = (str.size() / 2) + 1;
+    cout << len << endl;
 
-    string s1;
-    getline(cin, s1);
-    istringstream str(s1);
-    string out;
-
-    vector<string> result;
-    while (str >> out)
+    int num[len];
+    int j = 0;
+    for (int i = 0; i < len; i++)
     {
-        result.push_back(out);
+
+        num[i] = str[j] - 48;
+        cout << str[j] << endl;
+        j = j + 2;
     }
 
-    for (int i = 0; i < result.size(); i++)
+    for (int i = 0; i < len; i++)
     {
-        cout << result[i] << endl;
-        cout << result[i].size() << endl;
+        cout << num[i];
     }
 }
