@@ -1,28 +1,22 @@
 #include <iostream>
-#include <sstream>
 #include <vector>
 
 using namespace std;
 
-int main(int argc, char **argv)
+int main(int argc, char const *argv[])
 {
-    string str;
-    getline(cin, str);
-    int len = (str.size() / 2) + 1;
-    cout << len << endl;
-
-    int num[len];
-    int j = 0;
-    for (int i = 0; i < len; i++)
+    vector<int> nums;
+    int num;
+    while (cin >> num)
     {
-
-        num[i] = str[j] - 48;
-        cout << str[j] << endl;
-        j = j + 2;
+        nums.push_back(num);
     }
 
-    for (int i = 0; i < len; i++)
+    for (int i = 0; i < nums.size(); i++)
     {
-        cout << num[i];
+        cout << nums[i]<<" ";
+
     }
+
+    return 0;
 }

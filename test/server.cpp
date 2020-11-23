@@ -3,7 +3,7 @@
     服务器端
 */
 
-#pragma comment(lib,"WS2_32.lib")
+
 
 #include<Winsock2.h>
 #include<stdio.h>
@@ -11,7 +11,7 @@
 #include<windows.h>
 #include<iostream>
 
-
+#pragma comment(lib,"WS2_32.lib")
 
 using namespace std;
 
