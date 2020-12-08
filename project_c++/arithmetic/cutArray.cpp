@@ -10,7 +10,6 @@
 #include <sstream>
 #include <vector>
 #include <map>
-
 using namespace std;
 
 bool isPossible(vector<int> &nums)
@@ -63,11 +62,7 @@ int main(int argc, char const *argv[])
     int size;
     size = nums.size();
 
-    for (int i = 0; i < size;i++)
-    {
 
-        cout << nums[i] << endl;
-    }
 
         return 0;
 }
