@@ -1,6 +1,6 @@
 /*
-    01背包
-    回溯法
+    01鑳屽寘
+    鍥炴函娉�
 
 */
 #include <ctime>
@@ -9,27 +9,27 @@
 
 using namespace std;
 
-#define N 100000 //默认有十万个物品。第一个不使用
-int weights[N];     //每个物品的重量
-int values[N];     //每个物品的价值
-int x[N];     //x[i]=1：物品i放入背包，0代表不放入
+#define N 101 //榛樿鏈夊崄涓囦釜鐗╁搧銆傜涓€涓笉浣跨敤
+int weights[N];     //姣忎釜鐗╁搧鐨勯噸閲�
+int values[N];     //姣忎釜鐗╁搧鐨勪环鍊�
+int x[N];     //x[i]=1锛氱墿鍝乮鏀惧叆鑳屽寘锛�0浠ｈ〃涓嶆斁鍏�
 
-int Items = 6;
-int MaxWeight = 15; //n：一共有多少物品，c：背包的最大容量
+int Items = 100;
+int MaxWeight = 5000; //n锛氫竴鍏辨湁澶氬皯鐗╁搧锛宑锛氳儗鍖呯殑鏈€澶у閲�
 
-string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights2.txt";
-string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values2.txt";
+string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights100.txt";
+string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values100.txt";
 
 /*
-*CurWeight 和 CurValue存储当前放入背包的数据，随着对解空间的不断深入而变化
+*CurWeight 鍜� CurValue瀛樺偍褰撳墠鏀惧叆鑳屽寘鐨勬暟鎹紝闅忕潃瀵硅В绌洪棿鐨勪笉鏂繁鍏ヨ€屽彉鍖�
 */
-int CurWeight = 0; //当前放入背包的物品总重量
-int CurValue = 0;  //当前放入背包的物品总价值
+int CurWeight = 0; //褰撳墠鏀惧叆鑳屽寘鐨勭墿鍝佹€婚噸閲�
+int CurValue = 0;  //褰撳墠鏀惧叆鑳屽寘鐨勭墿鍝佹€讳环鍊�
 /*
-*BestValue 和 BestX在找到一个叶子节点时进行 约束函数 判断，满足的话就连同修改储存的最优解
+*BestValue 鍜� BestX鍦ㄦ壘鍒颁竴涓彾瀛愯妭鐐规椂杩涜 绾︽潫鍑芥暟 鍒ゆ柇锛屾弧瓒崇殑璇濆氨杩炲悓淇敼鍌ㄥ瓨鐨勬渶浼樿В
 */
-int BestValue = 0; //最优值；当前的最大价值，初始化为0
-int BestX[N];      //最优解；BestX[i]=1代表物品i放入背包，0代表不放入
+int BestValue = 0; //鏈€浼樺€硷紱褰撳墠鐨勬渶澶т环鍊硷紝鍒濆鍖栦负0
+int BestX[N];      //鏈€浼樿В锛汢estX[i]=1浠ｈ〃鐗╁搧i鏀惧叆鑳屽寘锛�0浠ｈ〃涓嶆斁鍏�
 
 void read_text(int *nums, string location)
 {
@@ -38,11 +38,13 @@ void read_text(int *nums, string location)
     ifs.open(location, ios::in);
     if (!ifs.is_open())
     {
-        cout << "文件打开失败：" << endl;
+        cout << "鏂囦欢鎵撳紑澶辫触锛�" << endl;
     }
 
     int num;
     int i = 0;
+    
+    //浠� x[1]寮€濮�
     while (ifs >> num)
     {
         i++;
@@ -52,28 +54,28 @@ void read_text(int *nums, string location)
     ifs.close();
 }
 
-//回溯输出路径
-// void output()
-// {
-//     cout << "最优值是:" << BestValue << endl;
-//     cout << "(";
-//     for (int i = 1; i <= n; i++)
-//         cout << BestX[i] << " ";
-//     cout << ")";
-// }
+//鍥炴函杈撳嚭璺緞
+void output()
+{
+    cout << "鏈€浼樺€兼槸:" << BestValue << endl;
+    cout << "(";
+    for (int i = 1; i <= Items; i++)
+        cout << BestX[i] << " ";
+    cout << ")";
+}
 
 /*
-*回溯函数 参数t表示当前处在第几层做抉择，t=1时表示当前在决定是否将第一个物品放入背包
+*鍥炴函鍑芥暟 鍙傛暟t琛ㄧず褰撳墠澶勫湪绗嚑灞傚仛鎶夋嫨锛宼=1鏃惰〃绀哄綋鍓嶅湪鍐冲畾鏄惁灏嗙涓€涓墿鍝佹斁鍏ヨ儗鍖�
 */
 void backtrack(int t)
 {
-    //叶子节点，输出结果
+    //鍙跺瓙鑺傜偣锛岃緭鍑虹粨鏋�
     if (t > Items)
     {
-        //如果找到了一个更优的解
+        //濡傛灉鎵惧埌浜嗕竴涓洿浼樼殑瑙�
         if (CurValue > BestValue)
         {
-            //保存更优的值和解
+            //淇濆瓨鏇翠紭鐨勫€煎拰瑙�
             BestValue = CurValue;
             for (int i = 1; i <= Items; ++i)
                 BestX[i] = x[i];
@@ -81,18 +83,18 @@ void backtrack(int t)
     }
     else
     {
-        //遍历当前节点的子节点：0 不放入背包，1放入背包
+        //閬嶅巻褰撳墠鑺傜偣鐨勫瓙鑺傜偣锛�0 涓嶆斁鍏ヨ儗鍖咃紝1鏀惧叆鑳屽寘
         for (int i = 0; i <= 1; ++i)
         {
             x[t] = i;
 
-            if (i == 0) //不放入背包
+            if (i == 0) //涓嶆斁鍏ヨ儗鍖�
             {
                 backtrack(t + 1);
             }
-            else //放入背包
+            else //鏀惧叆鑳屽寘
             {
-                //约束条件：放的下
+                //绾︽潫鏉′欢锛氭斁鐨勪笅
                 if ((CurWeight + weights[t]) <= MaxWeight)
                 {
                     CurWeight += weights[t];
@@ -113,12 +115,13 @@ int main(int argc, char *argv[])
     read_text(values, values_txt);
 
     clock_t startTime, endTime;
-    startTime = clock(); //计时结束
+    startTime = clock(); //璁℃椂缁撴潫
     backtrack(1);
     cout << BestValue << endl;
-    endTime = clock(); //计时结束
+    endTime = clock(); //璁℃椂缁撴潫
     cout << "The run time is:" << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
 
+    //output();
 
     return 0;
 }

@@ -11,15 +11,15 @@
 
 using namespace std;
 
-#define N 100000 //默认有十万个物品。第一个不使用
+#define N 10000 //默认有十万个物品。第一个不使用
 int weights[N];     //每个物品的重量
 int values[N];     //每个物品的价值
 
-string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights2.txt";
-string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values2.txt";
+string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights100.txt";
+string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values100.txt";
 
-int Items = 6;
-int MaxWeight = 15;
+int Items = 10000;
+int MaxWeight = 500;
 
 int DP_Solution(int Items, int MaxWeight, int* weights, int* values)
 {
@@ -54,8 +54,10 @@ void read_text(int *nums, string location)
     int i = 0;
     while (ifs >> num)
     {
-        i++;
+        
         nums[i] = num;
+        i++;
+
     }
 
     ifs.close();
