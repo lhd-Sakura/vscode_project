@@ -11,11 +11,21 @@
 
 using namespace std;
 
-int DP_Solution(int Items, int MaxWeight, vector<int> weights, vector<int> values)
+#define N 100000 //默认有十万个物品。第一个不使用
+int weights[N];     //每个物品的重量
+int values[N];     //每个物品的价值
+
+string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights2.txt";
+string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values2.txt";
+
+int Items = 6;
+int MaxWeight = 15;
+
+int DP_Solution(int Items, int MaxWeight, int* weights, int* values)
 {
     int dp[Items + 1][MaxWeight + 1];
     int i, j;
-    for (i = 0; i < Items+1; i++)
+    for (i = 0; i < Items + 1; i++)
     {
         dp[i][0] = 0;
         for (j = 0; j < MaxWeight + 1; j++)
@@ -30,11 +40,10 @@ int DP_Solution(int Items, int MaxWeight, vector<int> weights, vector<int> value
     return dp[Items][MaxWeight];
 }
 
-void read_text(vector<int> &nums, string location)
+void read_text(int *nums, string location)
 {
 
     ifstream ifs;
-
     ifs.open(location, ios::in);
     if (!ifs.is_open())
     {
@@ -42,37 +51,33 @@ void read_text(vector<int> &nums, string location)
     }
 
     int num;
+    int i = 0;
     while (ifs >> num)
     {
-        nums.push_back(num);
+        i++;
+        nums[i] = num;
     }
 
     ifs.close();
-
 }
 
 int main()
 {
-    vector<int> weights;
-    vector<int> values;
-
-    string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights1.txt";
-    string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values1.txt";
+    //vector<int> weights;
+    //vector<int> values;
 
     read_text(weights, weight_txt);
     read_text(values, values_txt);
-
-    int Items = 5;
-    int MaxWeight = 8;
 
     int result;
 
     clock_t startTime, endTime;
     startTime = clock(); //计时结束
     result = DP_Solution(Items, MaxWeight, weights, values);
+    cout << result << endl;
     endTime = clock(); //计时结束
     cout << "运行时间是： " << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
 
-    cout << result << endl;
+    
     return 0;
 }

@@ -9,16 +9,16 @@
 
 using namespace std;
 
-#define N 1000000 //默认有99个物品。第一个不使用
+#define N 100000 //默认有十万个物品。第一个不使用
 int weights[N];     //每个物品的重量
 int values[N];     //每个物品的价值
 int x[N];     //x[i]=1：物品i放入背包，0代表不放入
 
-int Items = 5;
-int MaxWeight = 8; //n：一共有多少物品，c：背包的最大容量
+int Items = 6;
+int MaxWeight = 15; //n：一共有多少物品，c：背包的最大容量
 
-string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights1.txt";
-string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values1.txt";
+string weight_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/weights2.txt";
+string values_txt = "F:/A_Project/vscode_project/project_c++/arithmetic/text/values2.txt";
 
 /*
 *CurWeight 和 CurValue存储当前放入背包的数据，随着对解空间的不断深入而变化
@@ -115,9 +115,10 @@ int main(int argc, char *argv[])
     clock_t startTime, endTime;
     startTime = clock(); //计时结束
     backtrack(1);
+    cout << BestValue << endl;
     endTime = clock(); //计时结束
     cout << "The run time is:" << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
-    cout << BestValue << endl;
+
 
     return 0;
 }
