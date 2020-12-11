@@ -1,105 +1,101 @@
-/*
-    01背包
-    回溯
-
-*/
-
-
 #include <algorithm>
 #include <ctime>
 #include <fstream>
 #include <iostream>
 #include <stack>
+
+//#include <conio.h>
 using namespace std;
 
+#define N 100000   //10万
 
- 
-#define N 10000   //默认有99个物品。第一个不使用
-int weights[N];    //每个物品的重量
-int values[N];    //每个物品的价值
-int x[N];     //x[i]=1：物品i放入背包，0代表不放入
-int Items;
-int MaxWeight;       //n：一共有多少物品，c：背包的最大容量
+string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/20000.txt";
 
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/20.txt";
-/*
-*CurWeight 和 CurValue存储当前放入背包的数据，随着对解空间的不断深入而变化
-*/
-int CurWeight = 0;  //当前放入背包的物品总重量
-int CurValue = 0;   //当前放入背包的物品总价值
-/*
-*BestValue 和 BestX在找到一个叶子节点时进行 约束函数 判断，满足的话就连同修改储存的最优解
-*/
-int BestValue = 0;  //最优值；当前的最大价值，初始化为0
-int BestX[N];       //最优解；BestX[i]=1代表物品i放入背包，0代表不放入
- 
-void input()
+int Items;              //物品数量
+double MaxWeight;           //背包容量
+double values[N];        //各个物品的价值　value
+double weights[N];        //各个物品的重量　weight
+double cw = 0.0;    //当前背包重量　current weight
+double cp = 0.0;    //当前背包中物品总价值　current value
+double bestp = 0.0; //当前最优价值best price
+double perp[N];     //单位物品价值(排序后) per price
+int order[N];       //物品编号
+int put[N];         //设置是否装入，为1的时候表示选择该组数据装入，为0的表示不选择该组数据
+
+//按单位价值排序
+void knapsack()
 {
-    cout<<"请输入物品的个数："<<endl;
-    cin>>Items;
-    cout<<"请输入每个物品的重量及价值(如12 22):"<<endl;
-    for(int i = 1; i <= Items; i++)
+    int i, j;
+    int temporder = 0;
+    double temp = 0.0;
+
+    for (i = 1; i <= Items; i++)
+        perp[i] = values[i] / weights[i]; //计算单位价值（单位重量的物品价值）
+    for (i = 1; i <= Items - 1; i++)
     {
-        cin>>weights[i]>>values[i];
-    }
-    cout<<"请输入背包的容量："<<endl;
-    cin>>MaxWeight;
-}
-void output()
-{
-    cout<<"最优值是:"<<BestValue<<endl;
-    // cout<<"(";
-    // for(int i=1;i<=Items;i++)
-    //     cout<<BestX[i]<<" ";
-    // cout<<")";
- 
-}
-/*
-*回溯函数 参数t表示当前处在第几层做抉择，t=1时表示当前在决定是否将第一个物品放入背包
-*/
-void backtrack(int t)
-{
-    //叶子节点，输出结果
-    if(t>Items)
-    {
-        //如果找到了一个更优的解
-        if(CurValue>BestValue)
-        {
-            //保存更优的值和解
-            BestValue = CurValue;
-            for(int i=1; i<=Items; ++i)
-                BestX[i] = x[i];
-        }
-    }
-    else
-    {
-        //遍历当前节点的子节点：0 不放入背包，1放入背包
-        for(int i=0; i<=1; ++i)
-        {
-            x[t]=i;
- 
-            if(i==0) //不放入背包
+        for (j = i + 1; j <= Items; j++)
+            if (perp[i] < perp[j]) //冒泡排序perp[],order[],sortv[],sortw[]
             {
-                backtrack(t+1);
+                temp = perp[i]; //冒泡对perp[]排序
+                perp[i] = perp[j];
+                perp[j] = temp;
+
+                temporder = order[i]; //冒泡对order[]排序
+                order[i] = order[j];
+                order[j] = temporder;
+
+                temp = values[i]; //冒泡对v[]排序
+                values[i] = values[j];
+                values[j] = temp;
+
+                temp = weights[i]; //冒泡对w[]排序
+                weights[i] = weights[j];
+                weights[j] = temp;
             }
-            else //放入背包
-            {
-                //约束条件：放的下
-                if((CurWeight+weights[t])<=MaxWeight)
-                {
-                    CurWeight += weights[t];
-                    CurValue += values[t];
-                    backtrack(t+1);
-                    CurWeight -= weights[t];
-                    CurValue -= values[t];
-                }
-            }
-        }
     }
- 
- 
 }
 
+//回溯函数
+void backtrack(int i)
+{ //i用来指示到达的层数（第几步，从0开始），同时也指示当前选择玩了几个物品
+    double bound(int i);
+    if (i > Items) //递归结束的判定条件
+    {
+        bestp = cp;
+        return;
+    }
+    //如若左子节点可行，则直接搜索左子树;
+    //对于右子树，先计算上界函数，以判断是否将其减去
+    if (cw + weights[i] <= MaxWeight) //将物品i放入背包,搜索左子树
+    {
+        cw += weights[i]; //同步更新当前背包的重量
+        cp += values[i]; //同步更新当前背包的总价值
+        put[i] = 1;
+        backtrack(i + 1); //深度搜索进入下一层
+        cw -= weights[i];       //回溯复原
+        cp -= values[i];       //回溯复原
+    }
+    if (bound(i + 1) > bestp) //如若符合条件则搜索右子树
+        backtrack(i + 1);
+}
+
+//计算上界函数，功能为剪枝
+double bound(int i)
+{                          //判断当前背包的总价值cp＋剩余容量可容纳的最大价值<=当前最优价值
+    double leftw = MaxWeight - cw; //剩余背包容量
+    double b = cp;         //记录当前背包的总价值cp,最后求上界
+    //以物品单位重量价值递减次序装入物品
+    while (i <= Items && weights[i] <= leftw)
+    {
+        leftw -= weights[i];
+        b += values[i];
+        i++;
+    }
+    //装满背包
+    if (i <= Items)
+        b += values[i] / weights[i] * leftw;
+    return b; //返回计算出的上界
+}
 
 void read_text(string location)
 {
@@ -121,36 +117,18 @@ void read_text(string location)
 
     ifs.close();
 }
- 
-int main(int argc, char* argv[])
+
+int main()
 {
- 
     read_text(location);
+
+    clock_t startTime, endTime;
+    startTime = clock(); //计时结束
+    knapsack();
     backtrack(1);
-    output();
+    endTime = clock(); //计时结束
+    cout << bestp << endl;
+    cout << "The run time is:" << (double)(endTime - startTime) << "ms" << endl;
+
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
