@@ -1,123 +1,85 @@
-/*
-    01背包
-    分支界限法
-
-*/
-#include <ctime>
-#include <fstream>
 #include <iostream>
-#include <stack>
+#include <queue>
+#include <vector>
+#include <fstream>
+#include <algorithm>
 
 using namespace std;
-#define N 10000
-
-int weights[N], values[N]; // 把物品重量和价值定义为双精度浮点数
-int cw, cp;
-
-int MaxWeight ; //cw 为当前重量， cp 为当前价值，定义背包容量为 30
-int Items ;      // 货物数量为 3
-
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/testzhu.txt";
-
-class HeapNode // 定义 HeapNode 结点类
+struct Res
 {
-public:
-    double
-        upper,
-        price, weight; //upper 为结点的价值上界， price 是结点所对应的价值， weight 为结点所相应的重量
-    int level, x[N];   // 活节点在子集树中所处的层序号
+    int weight, value;
+    bool used = false;
+};
+struct Bags
+{
+    vector<Res *> bags;
+    int nweigt, nvalue = 0, ub;
+    Bags operator+(Res *&res)
+    {
+        Bags bag = *this;
+        bag.bags.push_back(res);
+        bag.nweigt -= res->weight;
+        bag.nvalue += res->value;
+        return bag;
+    }
 };
 
-stack<HeapNode> High; // 最大队 High
-
-double MaxBound(int j) //MaxBound 函数求最大上界
-{
-    double
-        left = MaxWeight - cw,
-        b = cp;                              // 剩余容量和价值上界
-    while (j <= Items && weights[j] <= left) // 以物品单位重量价值递减装填剩余容量
-    {
-        left -= weights[j];
-        b += values[j];
-        j++;
-    }
-    if (j <= Items)
-        b += values[j] / weights[j] * left; // 装填剩余容量装满背包
-    return b;
-}
-
-void AddLiveNode(double up, double cp, double cw, bool ch, int lev)
-//将一个新的活结点插入到子集数和最大堆 High 中
-{
-    HeapNode be;
-    be.upper = up;
-    be.price = cp;
-    be.weight = cw;
-    be.level = lev;
-    if (lev <= Items)
-        High.push(be); // 调用 stack 头文件的 push 函数
-}
-
-double Knap() // 优先队列分支限界法，返回最大价值， bestx 返回最优解
-{
-    int i = 1;
-    cw = cp = 0;
-    double
-        bestp = 0,
-        up = MaxBound(1); // 调用 MaxBound 求出价值上界， best 为最优值
-    while (1)             // 非叶子结点
-    {
-        double wt = cw + weights[i];
-        if (wt <= MaxWeight) // 左儿子结点为可行结点
-        {
-            if (cp + values[i] > bestp)
-                bestp = cp + values[i];
-            AddLiveNode(up, cp + values[i], cw + weights[i], true, i + 1);
-        }
-        up = MaxBound(i + 1);
-        if (up >= bestp) // 右子数可能含最优解
-            AddLiveNode(up, cp, cw, false, i + 1);
-        if (High.empty())
-            return bestp;
-        HeapNode node = High.top(); // 取下一扩展结点
-        High.pop();
-        cw = node.weight;
-        cp = node.price;
-        up = node.upper;
-        i = node.level;
-    }
-}
-
-void read_text(string location)
-{
-
-    ifstream ifs;
-    ifs.open(location, ios::in);
-    if (!ifs.is_open())
-    {
-        cout << "文件打开失败：" << endl;
-    }
-
-    ifs >> Items >> MaxWeight;
-
-    for (int i = 1; i <= Items; i++)
-    {
-        //cout << "第" << i + 1 << "件物品的重量和价值：";
-        ifs >>weights[i] >> values[i];
-    }
-
-
-    ifs.close();
-}
 
 int main()
 {
-    read_text(location);
-
-    clock_t startTime, endTime;
-    startTime = clock();    //计时结束
-    cout << Knap() << endl; // 调用 knap 函数 输出最大价值
-    endTime = clock();      //计时结束
-    cout << "The run time is:" << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
+    Res thing[] = {{4, 40}, {7, 42}, {5, 25}, {3, 12}};
+    vector<Res *> res;
+    vector<Bags> result;
+    for (auto &it : thing)
+        res.push_back(&it);
+    int W = 13;
+    sort(res.begin(), res.end(), [](Res *&a, Res *&b) { return a->value / a->weight > b->value / b->weight; }); //优先排序
+    Bags start;
+    int up = W * res.front()->value / res.front()->weight, down = 0;
+    for (int i = 0, w = W; i < res.size(); i++)
+    { //贪心获取下界
+        if (res[i]->weight < w)
+        {
+            down += res[i]->value;
+            w -= res[i]->weight;
+        }
+    }
+    start.ub = up;
+    start.nweigt = W;
+    int size, count = 0;
+    queue<Bags> q;
+    q.push(start);
+    while (!q.empty() && count < res.size())
+    {
+        size = q.size(); //记录每层的节点数，进行层处理
+        for (int i = 0; i < size; i++)
+        {
+            Bags right = q.front();
+            if (right.nweigt - res[count]->weight >= 0)
+            {
+                Bags left = right + res[count];                                                                                        //左节点
+                left.ub = left.nvalue + (count + 1 < res.size() ? left.nweigt * (res[count + 1]->value / res[count + 1]->weight) : 0); //无法访问最后一层的count+1，值为0
+                q.push(left);
+            }
+            right.ub = right.nvalue + (count + 1 < res.size() ? right.nweigt * (res[count + 1]->value / res[count + 1]->weight) : 0); //修改右结点
+            if (right.ub > down)
+                q.push(right);
+            else
+                result.push_back(right);
+            q.pop();
+        }
+        count++;
+    }
+    Bags *minBag = nullptr;
+    for (int i = 0; i < result.size(); i++)
+    { //在表中寻找最优方案
+        if (minBag == nullptr || result[i].nvalue > minBag->nvalue)
+            minBag = &result[i];
+    }
+    for (auto &it : minBag->bags)
+        it->used = true;
+    cout << "分支限界法求得最大价值为：" << minBag->nvalue << endl;
+    for (int i = 0; i < res.size(); i++)
+        cout << "物品" << i + 1 << "是否被选：" << thing[i].used << endl;
     return 0;
 }

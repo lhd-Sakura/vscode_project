@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - system",
+            "request": "launch",
+            "mainClass": "system",
+            "projectName": "learning_java_858d827"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - SimpleTCP",
             "request": "launch",
             "mainClass": "SimpleTCP",

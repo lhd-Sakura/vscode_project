@@ -6,14 +6,14 @@
 
 using namespace std;
 
-#define N 10000
+#define N 100
 
 int weights[N], values[N]; // 把物品重量和价值定义为双精度浮点数
 
 int MaxWeight; //cw 为当前重量， cp 为当前价值，定义背包容量为 30
 int Items;     // 货物数量为 3
 
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/testzhu.txt";
+string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/20.txt";
 
 int dp[N] = {0};
 

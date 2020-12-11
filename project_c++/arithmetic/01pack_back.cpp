@@ -14,14 +14,14 @@ using namespace std;
 
 
  
-#define N 1000   //默认有99个物品。第一个不使用
+#define N 10000   //默认有99个物品。第一个不使用
 int weights[N];    //每个物品的重量
 int values[N];    //每个物品的价值
 int x[N];     //x[i]=1：物品i放入背包，0代表不放入
 int Items;
 int MaxWeight;       //n：一共有多少物品，c：背包的最大容量
 
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/100.txt";
+string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/20.txt";
 /*
 *CurWeight 和 CurValue存储当前放入背包的数据，随着对解空间的不断深入而变化
 */
