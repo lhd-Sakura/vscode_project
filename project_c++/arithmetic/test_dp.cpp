@@ -21,9 +21,11 @@ int MaxWeight; //背包容量
 int Items;     // 物品数量
 
 //数据集存储位置
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/60000.txt";
+string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/50000.txt";
 
 long int dp[N] = {0};
+
+
 
 void read_text(string location)
 {
@@ -58,6 +60,22 @@ void DP_Solution()
     
 }
 
+
+void FindMaxBetter()//优化空间后的动态规划
+{
+    int i,j;
+    for(i=1;i<=Items;i++)
+    {
+        for(j=MaxWeight;j>=0;j--)
+        {
+            if(dp[j]<=dp[j-weights[i]]+values[i] && j-weights[i]>=0 )//二维变一维
+            {
+                dp[j]=dp[j-weights[i]]+values[i];
+            }
+        }
+    }
+}
+
 int main()
 {
     read_text(location);
@@ -65,9 +83,10 @@ int main()
     //计算算法运行时间
     clock_t startTime, endTime;
     startTime = clock(); 
-    DP_Solution();
+    FindMaxBetter();
     endTime = clock();
 
     cout <<"最优解："<< dp[MaxWeight] << endl;
     cout << "The run time is:" << (double)(endTime - startTime)  << "ms" << endl;
 }
+

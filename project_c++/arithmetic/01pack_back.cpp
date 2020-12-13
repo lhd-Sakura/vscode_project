@@ -1,3 +1,8 @@
+/*
+    01背包
+    回溯法
+
+*/
 #include <algorithm>
 #include <ctime>
 #include <fstream>
@@ -9,7 +14,7 @@ using namespace std;
 
 #define N 100000   //10万
 
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/20000.txt";
+string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/60000.txt";
 
 int Items;              //物品数量
 double MaxWeight;           //背包容量
