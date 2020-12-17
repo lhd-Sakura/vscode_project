@@ -1,6 +1,6 @@
 /*
     01背包
-    分支界限法
+    分支限界法
 
 */
 
@@ -12,7 +12,7 @@
 #include <stack>
 using namespace std;
 
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/60000.txt";
+string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/50000.txt";
 
 class AnswerWay
 {

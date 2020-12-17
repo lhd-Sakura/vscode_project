@@ -13,15 +13,15 @@
 
 using namespace std;
 
-#define N 100000   //10万的容量
+#define N 100000 //10万的容量
 
 int weights[N], values[N]; // 物品的重量和价值
 
-int MaxWeight; //背包容量
 int Items;     // 物品数量
+int MaxWeight; //背包容量
 
 //数据集存储位置
-string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/60000.txt";
+string location = "F:/A_Project/vscode_project/project_c++/arithmetic/text/100.txt";
 
 long int dp[N] = {0};
 
@@ -39,7 +39,7 @@ void read_text(string location)
 
     for (int i = 1; i <= Items; i++)
     {
-        
+
         ifs >> weights[i] >> values[i];
     }
 
@@ -55,7 +55,6 @@ void DP_Solution()
             dp[j] = max(dp[j], dp[j - weights[i]] + values[i]);
         }
     }
-    
 }
 
 int main()
@@ -64,10 +63,10 @@ int main()
 
     //计算算法运行时间
     clock_t startTime, endTime;
-    startTime = clock(); 
+    startTime = clock();
     DP_Solution();
     endTime = clock();
 
-    cout <<"最优解："<< dp[MaxWeight] << endl;
-    cout << "The run time is:" << (double)(endTime - startTime)  << "ms" << endl;
+    cout << "最优解：" << dp[MaxWeight] << endl;
+    cout << "The run time is:" << (double)(endTime - startTime) << "ms" << endl;
 }

@@ -35,7 +35,7 @@ void knapsack()
     double temp = 0.0;
 
     for (i = 1; i <= Items; i++)
-        perp[i] = values[i] / weights[i]; //计算单位价值（单位重量的物品价值）
+        perp[i] = values[i] / weights[i]; 
     for (i = 1; i <= Items - 1; i++)
     {
         for (j = i + 1; j <= Items; j++)
@@ -62,15 +62,14 @@ void knapsack()
 
 //回溯函数
 void backtrack(int i)
-{ //i用来指示到达的层数（第几步，从0开始），同时也指示当前选择玩了几个物品
+{ 
     double bound(int i);
     if (i > Items) //递归结束的判定条件
     {
         bestp = cp;
         return;
     }
-    //如若左子节点可行，则直接搜索左子树;
-    //对于右子树，先计算上界函数，以判断是否将其减去
+   
     if (cw + weights[i] <= MaxWeight) //将物品i放入背包,搜索左子树
     {
         cw += weights[i]; //同步更新当前背包的重量
@@ -84,10 +83,10 @@ void backtrack(int i)
         backtrack(i + 1);
 }
 
-//计算上界函数，功能为剪枝
+//剪枝
 double bound(int i)
-{                          //判断当前背包的总价值cp＋剩余容量可容纳的最大价值<=当前最优价值
-    double leftw = MaxWeight - cw; //剩余背包容量
+{                          
+    double leftw = MaxWeight - cw;
     double b = cp;         //记录当前背包的总价值cp,最后求上界
     //以物品单位重量价值递减次序装入物品
     while (i <= Items && weights[i] <= leftw)
@@ -99,7 +98,7 @@ double bound(int i)
     //装满背包
     if (i <= Items)
         b += values[i] / weights[i] * leftw;
-    return b; //返回计算出的上界
+    return b; 
 }
 
 void read_text(string location)
