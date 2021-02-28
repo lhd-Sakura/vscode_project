@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子元素选择器</title>
+
+    <style>
+        /* 会将nav中所有的a变红 */
+        /* .nav a {
+            color: red;
+        } */
+
+        /* 只会将第一级的a标红 */
+        .nav>a {
+            color: red;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <a href="#">我是儿子</a>
+        <p>
+            <a href="#">我是孙子</a>
+        </p>
+        <a href="#">我也是儿子</a>
+    </div>
+
+</body>
+
+</html>
