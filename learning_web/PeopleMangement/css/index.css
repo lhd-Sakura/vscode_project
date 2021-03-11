@@ -1,0 +1,64 @@
+.w {
+    width: 1440px;
+    height: 750px;
+    margin: 2px auto;
+
+    background-color: #EAEDEE;
+}
+
+
+.w .nav {
+    position: relative;
+    width: 110px;
+    height: 100%;
+
+    background-color: #F9F9F9;
+
+}
+
+.yuliu {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 60px;
+    background-color: #08465A;
+}
+
+.touxiang {
+    position: absolute;
+    top: 90px;
+    height: 96px;
+    margin: 0px 7px;
+    background-color: #EAECF8;
+    border-radius: 100%;
+
+    font-family: Microsoft JhengHei;
+    font-size: 24px;
+    line-height: 60px;
+    padding: 15px 22px;
+    color: #000000;
+
+}
+
+
+.kaoqin {
+    position: absolute;
+    top: 282px;
+
+    display: block;
+    width: 100%;
+    height: 122px;
+    background-color: #EAEDEE;
+
+}
+
+.yuangong {
+    position: absolute;
+    top: 411px;
+
+    display: block;
+    width: 100%;
+    height: 122px;
+    background-color: #EAEDEE;
+
+}

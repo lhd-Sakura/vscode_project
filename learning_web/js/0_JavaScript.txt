@@ -1,0 +1,149 @@
+JavaScript
+
+变量 var
+    自动为变量分配空间
+
+    var age;
+    age = 18;
+
+    var myname = prompt('请输入你的名字');//输入对话框
+   
+    alert       浏览器弹出警示框
+    console     浏览器控制台打印输出信息
+    prompt      浏览器弹出输入框，用户可以输入
+
+
+数据类型
+    Number
+    Boolean
+    String          ""
+    Undefined       var a;  声明a但是没给值，此时   a = undefined 
+    Null            var a = null;
+
+    Infinity        无穷大
+    -Infinity       无穷小
+    NaN             非数字
+
+    Js可以用单引号嵌套双引号，或者用双引号嵌套单引号（外双内单，外单内双）
+
+
+    typeof可以用来获取检测变量的数据类型
+
+    parseInt(变量)  可以把 字符型的转换为数字型 得到的是整数
+    parseFloat(string)
+
+
+    与  &&
+    或  ||
+    非  ！
+
+
+数组
+    var arr = new Array();
+    var arr = [];
+    //数组中可以存放任意的数据类型
+    var arr = [1,2,3,4];
+
+    arr.length
+
+    数组中新增元素
+        可以通过修改数组索引的方式追加数组元素      修改 length 长度
+
+
+
+函数    function
+    函数声明时加 function
+
+    function CountNum()
+    {
+        //函数实现内容
+    }
+
+    
+
+    当我们不确定有多少个参数传递的时候，可以用 arguments 来获取
+    agruments 对象中存储了传递函数的所有实参
+
+    console.log(arguments);
+
+    arguments展示形式是一个伪数组，可以进行遍历
+    不具有数组的 push，pop 等方法
+
+
+对象
+    var obj={
+        age:18;
+        fn:function(){
+
+
+        }
+
+    }
+
+    
+    var obj = new Object();
+    obj.name = "jtc";
+    obj.age = 18;
+    obj.sayHai = function(){
+
+    }
+
+
+    利用构造函数创建对象（类）
+    function Star(uname,age,sex){
+        this.name = uname;
+        this.age = age;
+        this.sex = sex;
+    }
+
+    var ldh = new Star('刘德华',18,'男');
+
+    //构造函数名字首字母要大写
+
+
+    new关键字
+        new 构造函数可以在内存中创建了一个空的对象
+        this 就会指向刚才创建的空对象
+        执行构造函数里面的代码 给这个空对象添加属性和方法
+        返回这个对象
+
+
+    遍历对象
+
+        // k 首先不需要进行赋值和定义
+        for(var k in obj){
+            console.log(k);         //k 变量输出 得到的是 属性名
+            console.log(obj[k]);    //obj[k] 得到的是 属性值
+        }
+
+
+
+内置对象API
+        查阅文档
+            MDN、W3C
+            https://developer.mozilla.org/zh-CN/
+
+        Math 对象，里面涵盖大量的方法
+        Data 对象，需要 new 
+            console.log(now);   //获取当前时间必须进行实例化
+
+
+        数组
+            push        末尾添加一个或多个元素，注意修改原数组
+            pop         删除数组最后一个元素，把数组长度减1，修改原数组
+            unshift     向数组的开头添加一个或更多元素，注意修改原数组
+            shift       删除数组的第一个元素，数组长度减1无参数，修改原数组
+
+            reverse     颠倒数组中元素的顺序，无参数，返回新数组
+            sort()      排序    返回新数组
+
+            indexOf     查找给定元素的第一个索引，返回值为索引号
+            lastIndexOf 在数组中的最后一个的索引    返回索引号
+
+            toString
+
+
+
+
+
+
