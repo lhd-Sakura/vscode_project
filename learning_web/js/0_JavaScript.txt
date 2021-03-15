@@ -143,6 +143,50 @@ JavaScript
             toString
 
 
+DOM文档对象模型，标准编程接口
+    根据ID获取对象
+        getElementById()
+        通过 get 获得 element 元素
+
+    根据标签名获取
+        getElementsByTagName()
+        返回带有指定标签名的集合
+
+
+    高版本 querySelector() 啥都能选
+        第一个对象
+    querySelectorAll()  指定选择器的所有对象
+
+
+    执行事件的步骤
+        1.获取事件源
+        2.注册事件（绑定事件）
+        3.添加事件处理程序（函数赋值）
+
+
+    innerText 不识别html标签 非标准 去除换行和空格
+    innerHtml 识别html标签 w3c标准 啥都保留
+
+
+    可以通过JS修改元素的大小、颜色、位置样式
+        element.style       行内样式操作
+        element.className   类名样式操作
+
+        this.className = 'change'
+
+
+    onmouseover     鼠标经过
+    element.getAttribute('属性')    获得自定义属性值
+    element.setAttribute('属性')    修改
+
+
+
+    H5规定自定义属性 data-开头 作为属性名并且赋值 或者用 JS 进行赋值
+    element.dataset.index        element.dataset['index']
+
+
+
+
 
 
 

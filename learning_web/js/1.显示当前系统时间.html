@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM按钮显示时间</title>
+</head>
+
+<body>
+    <button>显示当前系统时间</button>
+    <div>某个时间</div>
+
+    <script>
+        var btn = document.querySelector('button');
+        var div = document.querySelector('div');
+
+        btn.onclick = function () {
+            div.innerText = getDate();
+        }
+
+
+        function getDate() {
+            var date = new Date();
+
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var dates = date.getDate();
+            var arr = ['星期日', '星期1', '星期2', '星期3', '星期4', '星期5', '星期6'];
+            var day = date.getDay();
+            return '今天是：' + year + '年' + month + '月' + dates + '日' + arr[day];
+            
+        }
+    </script>
+
+
+
+</body>
+
+</html>
